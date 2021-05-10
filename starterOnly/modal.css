@@ -317,6 +317,9 @@ input[data-error]::after {
   cursor: pointer;
   border: 0;
 }
+.btn-submit:hover{
+  background-color: #3876ac;
+}
 /* custom select styles */
 .custom-select {
   position: relative;
