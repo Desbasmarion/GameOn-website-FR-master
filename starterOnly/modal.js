@@ -51,16 +51,15 @@ closeModal.addEventListener("click", (e)=>{
 
 
 // Validation elements Form
-formModal.addEventListener('submit', validate, check);
+formModal.addEventListener('submit', validate);
 
 function validate(e){
+  e.preventDefault();
   if (firstName.value == ""){
-    e.preventDefault();
     errorMessageFirst.textContent = "Prénom manquant";
     errorMessageFirst.style.fontSize = "12px";
     errorMessageFirst.style.color = "red";
   } else if(regexName.test(firstName.value) == false){
-      e.preventDefault();
       errorMessageFirst.textContent = "format incorrect";
       errorMessageFirst.style.fontSize = "12px";
       errorMessageFirst.style.color = "red";
@@ -68,12 +67,10 @@ function validate(e){
 
   }
   if (lastName.value == ""){
-    e.preventDefault();
     errorMessageLast.textContent = "Nom manquant";
     errorMessageLast.style.fontSize = "12px";
     errorMessageLast.style.color = "red";
   } else if(regexName.test(lastName.value) == false){
-      e.preventDefault();
       errorMessageLast.textContent = "format incorrect";
       errorMessageLast.style.fontSize = "12px";
       errorMessageLast.style.color = "red";
@@ -81,12 +78,10 @@ function validate(e){
 
   }
   if (email.value == ""){
-    e.preventDefault();
     errorMessageEmail.textContent = "Email manquant";
     errorMessageEmail.style.fontSize = "12px";
     errorMessageEmail.style.color = "red";
   } else if(regexEmail.test(email.value) == false){
-      e.preventDefault();
       errorMessageEmail.textContent = "Adresse e-mail invalide";
       errorMessageEmail.style.fontSize = "12px";
       errorMessageEmail.style.color = "red";
@@ -94,7 +89,6 @@ function validate(e){
 
   }
   if (birthdate.value == ""){
-    e.preventDefault();
     errorMessageBirthdate.textContent = "Date d'anniversaire manquante";
     errorMessageBirthdate.style.fontSize = "12px";
     errorMessageBirthdate.style.color = "red";
@@ -102,30 +96,26 @@ function validate(e){
 
   }
   if (quantity.value == ""){
-    e.preventDefault();
     errorMessageQuantity.textContent = "Nombre de tournois manquants";
     errorMessageQuantity.style.fontSize = "12px";
     errorMessageQuantity.style.color = "red";
   } else if(regexNombreTournois.test(quantity.value) == false){
-      e.preventDefault();
       errorMessageQuantity.textContent = "format incorrect";
       errorMessageQuantity.style.fontSize = "12px";
       errorMessageQuantity.style.color = "red";
   } else{
 
   }
-}
+  if (checkboxes.some(e => checkboxes.checked == true)){
     
-function check(e){
-  for(let i=0; i<checkboxes.length; i++){
-    if (checkboxes[i].checked == false){
-      e.preventDefault();
-      errorMessageSelection.textContent = "Veuillez choisir au moins une ville";
-    }else{
-      
-    }
+  }else{
+    errorMessageSelection.textContent = "Veuillez choisir au moins une ville";
+    errorMessageSelection.style.fontSize = "12px";
+    errorMessageSelection.style.color = "red";
   }
 }
+  
+
 
 /*
 //test boucle  
