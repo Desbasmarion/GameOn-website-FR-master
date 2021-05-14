@@ -22,6 +22,8 @@ const email = document.querySelector("#email");
 const birthdate = document.querySelector("#birthdate");
 const quantity = document.querySelector("#quantity");
 let checkboxes = document.querySelectorAll(".checkbox-input");
+let arrayCheckboxes = Array.from(checkboxes);
+const elementsForm = document.querySelectorAll("div.formData > input");
 
 //Regex
 const regexName = /^[a-zA-Z-\s]+$/;
@@ -35,6 +37,7 @@ const errorMessageEmail = document.querySelector(".errorEmail");
 const errorMessageBirthdate = document.querySelector(".errorBirthdate");
 const errorMessageQuantity = document.querySelector(".errorQuantity");
 const errorMessageSelection = document.querySelector(".errorSelection");
+const errorMessagesAll = document.querySelectorAll("div.formData > span");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -47,8 +50,17 @@ function launchModal() {
 // close modal form on click
 closeModal.addEventListener("click", (e)=>{
   modalbg.style.display = "none";
-});
 
+  for (i=0; i<errorMessagesAll.length; i++){
+    errorMessagesAll[i].textContent = "";
+  };
+
+  for (i=0; i<elementsForm.length; i++){
+    if (elementsForm[i].value){
+      elementsForm[i].value = "";
+    };
+  }
+});
 
 // Validation elements Form
 formModal.addEventListener('submit', validate);
@@ -64,7 +76,7 @@ function validate(e){
       errorMessageFirst.style.fontSize = "12px";
       errorMessageFirst.style.color = "red";
   } else{
-
+      errorMessageFirst.textContent = "";
   }
   if (lastName.value == ""){
     errorMessageLast.textContent = "Nom manquant";
@@ -75,7 +87,7 @@ function validate(e){
       errorMessageLast.style.fontSize = "12px";
       errorMessageLast.style.color = "red";
   } else{
-
+    errorMessageLast.textContent = "";
   }
   if (email.value == ""){
     errorMessageEmail.textContent = "Email manquant";
@@ -86,14 +98,14 @@ function validate(e){
       errorMessageEmail.style.fontSize = "12px";
       errorMessageEmail.style.color = "red";
   } else{
-
+    errorMessageEmail.textContent = "";
   }
   if (birthdate.value == ""){
     errorMessageBirthdate.textContent = "Date d'anniversaire manquante";
     errorMessageBirthdate.style.fontSize = "12px";
     errorMessageBirthdate.style.color = "red";
   } else{
-
+    errorMessageBirthdate.textContent = "";
   }
   if (quantity.value == ""){
     errorMessageQuantity.textContent = "Nombre de tournois manquants";
@@ -104,18 +116,23 @@ function validate(e){
       errorMessageQuantity.style.fontSize = "12px";
       errorMessageQuantity.style.color = "red";
   } else{
-
+    errorMessageQuantity.textContent = "";
   }
-  if (checkboxes.some(e => checkboxes.checked == true)){
+  if (arrayCheckboxes.some(check)){
     
-  }else{
+  } else {
     errorMessageSelection.textContent = "Veuillez choisir au moins une ville";
     errorMessageSelection.style.fontSize = "12px";
     errorMessageSelection.style.color = "red";
   }
 }
-  
 
+
+function check(){
+  for (let i=0; i<arrayCheckboxes.length; i++){
+    arrayCheckboxes[i].checked == true;
+  }
+}
 
 /*
 //test boucle  
