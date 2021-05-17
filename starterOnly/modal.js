@@ -24,6 +24,7 @@ const quantity = document.querySelector("#quantity");
 let checkboxes = document.querySelectorAll(".checkbox-input");
 let arrayCheckboxes = Array.from(checkboxes);
 const elementsForm = document.querySelectorAll("div.formData > input");
+const checkboxConditions = document.getElementById("checkbox1");
 
 
 //Regex
@@ -39,6 +40,7 @@ const errorMessageBirthdate = document.querySelector(".errorBirthdate");
 const errorMessageQuantity = document.querySelector(".errorQuantity");
 const errorMessageSelection = document.querySelector(".errorSelection");
 const errorMessagesAll = document.querySelectorAll("div.formData > span");
+const errorMessageConditions = document.querySelector(".errorConditions");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -130,6 +132,13 @@ function validate(e){
     errorMessageSelection.textContent = "Veuillez choisir au moins une ville";
     errorMessageSelection.style.fontSize = "12px";
     errorMessageSelection.style.color = "red";
+  }
+  if (checkboxConditions.checked){
+
+  }else{
+    errorMessageConditions.textContent = "Veuillez cocher la case des conditions d'utilisation";
+    errorMessageConditions.style.fontSize = "12px";
+    errorMessageConditions.style.color = "red";
   }
   
 }
