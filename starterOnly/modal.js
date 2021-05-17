@@ -25,6 +25,7 @@ let checkboxes = document.querySelectorAll(".checkbox-input");
 let arrayCheckboxes = Array.from(checkboxes);
 const elementsForm = document.querySelectorAll("div.formData > input");
 
+
 //Regex
 const regexName = /^[a-zA-Z-\s]+$/;
 const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-_]+$/;
@@ -60,6 +61,11 @@ closeModal.addEventListener("click", (e)=>{
       elementsForm[i].value = "";
     };
   }
+  
+  for (i=0;i<checkboxes.length; i++){
+    checkboxes[i].checked == false;
+  }
+  
 });
 
 // Validation elements Form
@@ -125,14 +131,18 @@ function validate(e){
     errorMessageSelection.style.fontSize = "12px";
     errorMessageSelection.style.color = "red";
   }
+  
 }
-
 
 function check(){
-  for (let i=0; i<arrayCheckboxes.length; i++){
-    arrayCheckboxes[i].checked == true;
+  for (let i=0; i<checkboxes.length; i++){
+    if (checkboxes[i].checked == true){
+      return true;
+    }
   }
 }
+
+
 
 /*
 //test boucle  
