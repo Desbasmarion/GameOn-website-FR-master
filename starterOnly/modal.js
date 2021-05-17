@@ -26,7 +26,6 @@ let arrayCheckboxes = Array.from(checkboxes);
 const elementsForm = document.querySelectorAll("div.formData > input");
 const checkboxConditions = document.getElementById("checkbox1");
 
-
 //Regex
 const regexName = /^[a-zA-Z-\s]+$/;
 const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-_]+$/;
@@ -158,6 +157,7 @@ function validate(e){
   }
 }
 
+// message inscription réussie
 btnValidate.addEventListener('click', e =>{
   if (validate(e) == true){
   alert("Merci ! Votre réservation a été reçue.");
