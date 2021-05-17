@@ -53,7 +53,7 @@
         <div class="content">
           <button class="close" type="button" aria-label="Fermer" title="Fermer cette fenêtre">X</button>
           <div class="modal-body">
-            <form id="formulaire" name="reserve" action="index.html" method="get"> 
+            <form id="formulaire" name="reserve" action="index.html" method="get" onsubmit="return validate();"> 
               <div class="formData">
                 <label for="first">Prénom</label>
                 <input id="first" class="text-control" type="text" name="first" minlength="2"/>
@@ -76,7 +76,7 @@
               </div>
               <div class="formData"> 
                 <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label>
-                <input type="text" class="text-control" id="quantity" name="quantity" min="0" max="99">
+                <input type="text" class="text-control" id="quantity" name="quantity">
                 <span class="errorQuantity"></span>
               </div>
               <p class="text-label">Quelles villes ?</p>

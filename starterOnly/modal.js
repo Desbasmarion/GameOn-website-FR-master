@@ -30,7 +30,7 @@ const checkboxConditions = document.getElementById("checkbox1");
 //Regex
 const regexName = /^[a-zA-Z-\s]+$/;
 const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-_]+$/;
-const regexNombreTournois = /[0-9]$/;
+const regexNombreTournois = /^[0-9]+$/;
 
 // DOM Elements error
 const errorMessageFirst = document.querySelector(".errorFirstName");
@@ -74,74 +74,91 @@ closeModal.addEventListener("click", (e)=>{
 formModal.addEventListener('submit', validate);
 
 function validate(e){
-  e.preventDefault();
+  
   if (firstName.value == ""){
     errorMessageFirst.textContent = "Prénom manquant";
     errorMessageFirst.style.fontSize = "12px";
     errorMessageFirst.style.color = "red";
+    e.preventDefault();
   } else if(regexName.test(firstName.value) == false){
       errorMessageFirst.textContent = "format incorrect";
       errorMessageFirst.style.fontSize = "12px";
       errorMessageFirst.style.color = "red";
+      e.preventDefault();
   } else{
       errorMessageFirst.textContent = "";
+      return true;
   }
   if (lastName.value == ""){
     errorMessageLast.textContent = "Nom manquant";
     errorMessageLast.style.fontSize = "12px";
     errorMessageLast.style.color = "red";
+    e.preventDefault();
   } else if(regexName.test(lastName.value) == false){
-      errorMessageLast.textContent = "format incorrect";
+      errorMessageLast.textContent = "Veuillez entrer 2 caractères ou plus pour ce champ";
       errorMessageLast.style.fontSize = "12px";
       errorMessageLast.style.color = "red";
+      e.preventDefault();
   } else{
     errorMessageLast.textContent = "";
+    return true;
   }
   if (email.value == ""){
     errorMessageEmail.textContent = "Email manquant";
     errorMessageEmail.style.fontSize = "12px";
     errorMessageEmail.style.color = "red";
+    e.preventDefault();
   } else if(regexEmail.test(email.value) == false){
       errorMessageEmail.textContent = "Adresse e-mail invalide";
       errorMessageEmail.style.fontSize = "12px";
       errorMessageEmail.style.color = "red";
+      e.preventDefault();
   } else{
     errorMessageEmail.textContent = "";
+    return true;
   }
   if (birthdate.value == ""){
     errorMessageBirthdate.textContent = "Date d'anniversaire manquante";
     errorMessageBirthdate.style.fontSize = "12px";
     errorMessageBirthdate.style.color = "red";
+    e.preventDefault();
   } else{
     errorMessageBirthdate.textContent = "";
+    return true;
   }
   if (quantity.value == ""){
     errorMessageQuantity.textContent = "Nombre de tournois manquants";
     errorMessageQuantity.style.fontSize = "12px";
     errorMessageQuantity.style.color = "red";
+    e.preventDefault();
   } else if(regexNombreTournois.test(quantity.value) == false){
       errorMessageQuantity.textContent = "format incorrect";
       errorMessageQuantity.style.fontSize = "12px";
       errorMessageQuantity.style.color = "red";
+      e.preventDefault();
   } else{
     errorMessageQuantity.textContent = "";
+    return true;
   }
   if (arrayCheckboxes.some(check)){
-    
+    return true;
   } else {
     errorMessageSelection.textContent = "Veuillez choisir au moins une ville";
     errorMessageSelection.style.fontSize = "12px";
     errorMessageSelection.style.color = "red";
+    e.preventDefault();
   }
   if (checkboxConditions.checked){
-
+    return true;
   }else{
-    errorMessageConditions.textContent = "Veuillez cocher la case des conditions d'utilisation";
+    errorMessageConditions.textContent = "Veuillez acceptez les termes et conditions";
     errorMessageConditions.style.fontSize = "12px";
     errorMessageConditions.style.color = "red";
+    e.preventDefault();
   }
-  
+
 }
+
 
 function check(){
   for (let i=0; i<checkboxes.length; i++){
