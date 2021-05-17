@@ -156,8 +156,14 @@ function validate(e){
     errorMessageConditions.style.color = "red";
     e.preventDefault();
   }
-
 }
+
+btnValidate.addEventListener('click', e =>{
+  if (validate(e) == true){
+  alert("Merci ! Votre réservation a été reçue.");
+}
+})
+
 
 
 function check(){
