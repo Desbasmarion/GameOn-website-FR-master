@@ -14,6 +14,7 @@ const formData = document.querySelectorAll(".formData");
 const closeModal = document.querySelector(".close");
 const btnValidate = document.querySelector(".btn-submit");
 
+
 // DOM Elements Form
 const formModal = document.querySelector("#formulaire");
 const firstName = document.querySelector("#first");
@@ -62,110 +63,104 @@ closeModal.addEventListener("click", (e)=>{
       elementsForm[i].value = "";
     };
   }
-  
-  for (i=0;i<checkboxes.length; i++){
-    checkboxes[i].checked == false;
+  for (i=0; i<arrayCheckboxes.length; i++){
+    if (arrayCheckboxes[i].checked){
+      arrayCheckboxes[i].checked = false;
+    }
   }
-  
+  if (checkboxConditions.checked){
+    checkboxConditions.checked = false;
+  }
 });
 
 // Validation elements Form
 formModal.addEventListener('submit', validate);
 
+//Verification de tous les éléments du formulaire 
 function validate(e){
-  
+  e.preventDefault();
   if (firstName.value == ""){
     errorMessageFirst.textContent = "Prénom manquant";
     errorMessageFirst.style.fontSize = "12px";
     errorMessageFirst.style.color = "red";
-    e.preventDefault();
   } else if(regexName.test(firstName.value) == false){
-      errorMessageFirst.textContent = "format incorrect";
+      errorMessageFirst.textContent = "Format incorrect - Veuillez entrer 2 caractères ou plus pour ce champ";
       errorMessageFirst.style.fontSize = "12px";
       errorMessageFirst.style.color = "red";
-      e.preventDefault();
   } else{
       errorMessageFirst.textContent = "";
-      return true;
   }
   if (lastName.value == ""){
     errorMessageLast.textContent = "Nom manquant";
     errorMessageLast.style.fontSize = "12px";
     errorMessageLast.style.color = "red";
-    e.preventDefault();
   } else if(regexName.test(lastName.value) == false){
-      errorMessageLast.textContent = "Veuillez entrer 2 caractères ou plus pour ce champ";
+      errorMessageLast.textContent = "Format incorrect - Veuillez entrer 2 caractères ou plus pour ce champ";
       errorMessageLast.style.fontSize = "12px";
       errorMessageLast.style.color = "red";
-      e.preventDefault();
   } else{
     errorMessageLast.textContent = "";
-    return true;
   }
   if (email.value == ""){
     errorMessageEmail.textContent = "Email manquant";
     errorMessageEmail.style.fontSize = "12px";
     errorMessageEmail.style.color = "red";
-    e.preventDefault();
   } else if(regexEmail.test(email.value) == false){
       errorMessageEmail.textContent = "Adresse e-mail invalide";
       errorMessageEmail.style.fontSize = "12px";
       errorMessageEmail.style.color = "red";
-      e.preventDefault();
   } else{
     errorMessageEmail.textContent = "";
-    return true;
   }
   if (birthdate.value == ""){
     errorMessageBirthdate.textContent = "Date d'anniversaire manquante";
     errorMessageBirthdate.style.fontSize = "12px";
     errorMessageBirthdate.style.color = "red";
-    e.preventDefault();
   } else{
     errorMessageBirthdate.textContent = "";
-    return true;
   }
   if (quantity.value == ""){
     errorMessageQuantity.textContent = "Nombre de tournois manquants";
     errorMessageQuantity.style.fontSize = "12px";
     errorMessageQuantity.style.color = "red";
-    e.preventDefault();
   } else if(regexNombreTournois.test(quantity.value) == false){
       errorMessageQuantity.textContent = "format incorrect";
       errorMessageQuantity.style.fontSize = "12px";
       errorMessageQuantity.style.color = "red";
-      e.preventDefault();
   } else{
     errorMessageQuantity.textContent = "";
-    return true;
   }
   if (arrayCheckboxes.some(check)){
-    return true;
+    errorMessageSelection.textContent = "";
   } else {
     errorMessageSelection.textContent = "Veuillez choisir au moins une ville";
     errorMessageSelection.style.fontSize = "12px";
     errorMessageSelection.style.color = "red";
-    e.preventDefault();
   }
   if (checkboxConditions.checked){
-    return true;
-  }else{
+    errorMessageConditions.textContent ="";
+  }else if (checkboxConditions.checked == false){
     errorMessageConditions.textContent = "Veuillez acceptez les termes et conditions";
     errorMessageConditions.style.fontSize = "12px";
     errorMessageConditions.style.color = "red";
-    e.preventDefault();
   }
+  if (!firstName.value == "" && !regexName.test(firstName.value) == false && !lastName.value == "" &&!regexName.test(lastName.value) == false && !email.value == "" && !regexEmail.test(email.value) == false &&!birthdate.value == "" && !quantity.value == "" && !regexNombreTournois.test(quantity.value) == false &&arrayCheckboxes.some(check)&&checkboxConditions.checked){
+
+    let contentForm = document.querySelector(".mainFormData");
+
+    contentForm.textContent = "Merci ! Votre réservation a été reçue.";
+
+    btnValidate.value = "Fermer";
+
+    btnValidate.addEventListener("click",e =>{
+      modalbg.style.display = "none";
+    });
+
+  }
+  
 }
 
-// message inscription réussie
-btnValidate.addEventListener('click', e =>{
-  if (validate(e) == true){
-  alert("Merci ! Votre réservation a été reçue.");
-}
-})
-
-
-
+//Boucle pour vérification de chaques checkboxes
 function check(){
   for (let i=0; i<checkboxes.length; i++){
     if (checkboxes[i].checked == true){
@@ -176,8 +171,9 @@ function check(){
 
 
 
+
 /*
-//test boucle  
+//test boucle vérification de tous les éléments du formulaire
 let elementsForm = document.querySelectorAll("div.formData > input");
 let errorMessages = document.querySelectorAll("div.formData > span");
 

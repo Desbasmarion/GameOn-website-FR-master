@@ -169,6 +169,8 @@ main {
   position: relative;
   color: #fff;
   padding-top: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-body {
@@ -291,6 +293,8 @@ input[data-error]::after {
   border: none;
   font-size: large;
   cursor: pointer;
+  align-self: flex-end;
+  padding-right: 5%;
 }
 .btn-submit,
 .btn-signup {
@@ -488,6 +492,8 @@ footer {
     text-align: center;
   }
 }
+
+
 
 @keyframes modalopen {
   from {
